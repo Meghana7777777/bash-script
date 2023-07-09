@@ -151,3 +151,165 @@ then
 else
 	echo "not valid age"
 fi
+
+#using logical '0R/||/-o' operator
+# OR operator satisfies only one condition is true ,no need two conditions are true
+
+#! /bin/bash
+
+age=25
+
+if [ "$age" -gt 18 ] || [ "$age" -gt 30 ]
+# if [ "$age" -eq 18 -o "$age" -ne 20 ]
+# if [[ "$age" -gt 18 || "$age" -gt 30 ]]
+then
+	echo 'true'
+else
+	echo 'false'
+fi
+
+# using airthmetaic operations(+ , -, *, / ,% )
+#! /bin/bash
+
+num1=20
+num2=5
+
+echo $(( num1 + num2 ))
+echo $(( num1 - num2 ))
+echo $(( num1 * num2 ))
+echo $(( num1 / num2 ))
+echo $(( num1 % num2 ))
+
+#in expression
+
+echo $(expr $num1 + $num2 )
+echo $(expr $num1 - $num2 )
+echo $(expr $num1 \* $num2 )
+echo $(expr $num1 / $num2 )
+echo $(expr $num1 % $num2 )
+
+#floating point(decimal numbers) math operations
+
+#! /bin/bash
+
+num1=20.5
+num2=5
+
+echo "20.5+5"| bc # bc command is used to do some math operations like decimal,powers squareroot etc..
+echo "20.5-5"| bc
+echo "20.5*5"| bc
+echo "scale=2;20.5/5"| bc # here scale variable gives the exact value of division and modules operations
+echo "20.5%5"| bc
+
+  OR
+echo "$num1+$num2" | bc
+echo "$num1-$num2" | bc
+echo "$num1*$num2" | bc
+echo "$num1/$num2" | bc
+echo "$num1%$num2" | bc
+
+#using squareroot , power
+
+num=4
+
+echo "sqrt(4)" | bc -l # -l define the standard math library
+echo "3^3" | bc -l
+
+# case statement
+#! /bin/bash
+# basic syntax
+
+#case expression in
+#	pattern1 )
+#		statements ;;
+#	pattern2 )
+#		statements ;;
+#...
+#esac
+
+fruit=$1
+
+case $fruit in
+        "apple" )
+                echo "cost of $fruit is 10" ;;
+        "banana" )
+                echo "cost of $fruit is 5" ;;
+        "pineapple" )
+                echo "cost of $fruit is 15" ;;
+        * )
+                echo "not available" ;;
+esac
+
+#! /bin/bash
+
+echo -e "Enter some character : \c"
+read value
+case $value in
+	[a-z] )
+		echo "user entered $value  a to z";;
+	[A-Z] )
+                echo " user entered $value A TO z";;
+	[0-9] )
+		echo " user entred $value 0 to 9" ;;
+	? )
+		echo " user entered $value special character";;
+	* )
+		echo " unkwown input";;
+esac
+
+#arrays
+#! /bin/bash
+
+os=( 'ubuntu' 'windows' 'linux' )
+os[3]='mac' # add value 'mac' in 3 place
+unset os[2]
+echo "${os[@]}"  #'@' displays all elements in variable
+echo "${os[1]}"  #'1' displays the index value(1)
+echo "${!os[@]}" #'!' displays the index numbers
+echo "${#os[@]}" #'#' displays the length of values
+
+# while loop
+
+#! /bin/bash
+n=1
+while [ $n -le 10 ]  # (( $n '<=' 10 ))
+do
+	echo "$n"
+	n=$(( n+1 ))  #(( n++ )) , (( ++n ))
+done
+
+
+# sleep command
+#! /bin/bash
+
+n=5
+while [ $n -le 10 ]
+do
+	echo "$n"
+	n=$(( ++n )) # remove this line we get continuos number 5
+	sleep 2 # sleep commnand is used to get the output slowly according to time
+done
+
+# read file by using while loop in three ways
+#! /bin/bash
+
+while read p
+do
+	echo $p
+done < hello.sh
+
+ OR
+
+cat hello.sh | while read p
+do
+	echo $p
+done
+
+
+ OR
+
+while IFS= read -r line
+do
+	echo $line
+done < hello.sh
+
