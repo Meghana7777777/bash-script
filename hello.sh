@@ -313,3 +313,65 @@ do
 	echo $line
 done < hello.sh
 
+# until loop is like while loop but the difference is it execute the output while it false
+
+n=2
+until [ $n -gt 10 ]
+do
+        echo "$n"
+	n=$(( n+1 ))
+done
+
+# using for loop
+
+for i in 1 2 3 4 5
+do
+	echo $i
+done
+
+
+#OR 
+
+for i in {1..10..4}
+do 
+	 echo $i
+done
+
+ #OR
+
+for(( i=0; i<5; i++ ))
+do
+	echo$if
+done
+
+# OR
+
+#! /bin/bash
+#commands
+for command in ls pwd date
+do
+	echo "-------------$command------------"
+	$command
+done
+
+#OR
+
+for item in *
+do
+	if [ $item ]
+	then
+		echo $item
+	fi
+done
+
+
+	
+		
+
+
+  
+
+
+
+
+
